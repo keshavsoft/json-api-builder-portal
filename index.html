@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JSON API Builder — The Modular Backend Generation Ecosystem</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+              900: '#78350f',
+              950: '#451a03'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-zinc-950 text-zinc-100 antialiased min-h-screen flex flex-col font-sans selection:bg-amber-500/30 selection:text-amber-200">
+
+  <!-- Header -->
+  <header class="border-b border-zinc-800 bg-zinc-900/90 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-300 flex items-center justify-center text-zinc-950 shadow-lg shadow-amber-500/20 font-black text-lg">
+          λ
+        </div>
+        <div>
+          <span class="font-bold text-base tracking-tight text-white block">JSON API Builder</span>
+          <span class="text-[10px] text-zinc-400 font-mono tracking-wider uppercase">Modular Generator Ecosystem</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 text-xs font-mono">
+        <a href="repos/orchestrator/index.html" class="text-amber-400 hover:text-amber-300 font-semibold transition flex items-center gap-1.5 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/30">
+          <i class="bi bi-cpu"></i>
+          <span>Orchestrator & OpenAPI 3 Story</span>
+        </a>
+        <a href="#pipeline" class="text-zinc-400 hover:text-amber-400 transition hidden sm:inline">The Pipeline</a>
+        <a href="#stages" class="text-zinc-400 hover:text-amber-400 transition hidden sm:inline">8 Stages</a>
+        <a href="#orchestration" class="text-zinc-400 hover:text-amber-400 transition hidden sm:inline">Orchestration</a>
+        <a href="https://github.com/keshavsoft/json-api-builder-orchestrator" target="_blank" class="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:text-white flex items-center gap-2 border border-zinc-700 transition">
+          <i class="bi bi-github"></i>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="flex-1">
+    <section class="relative overflow-hidden py-20 px-4 sm:px-6 border-b border-zinc-800/80 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(245,158,11,0.15),rgba(255,255,255,0))]">
+      <div class="max-w-5xl mx-auto text-center space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono">
+          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+          Pure JSON ➔ Production Hono API Server
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white">
+          Small, focused stages.<br>
+          <span class="bg-gradient-to-r from-amber-400 via-orange-300 to-amber-500 bg-clip-text text-transparent">One powerful conductor.</span>
+        </h1>
+        <p class="text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+          Each stage in the JSON API Builder solves exactly one deterministic problem—from directory trees and file touch to AST routing and live Hono server initialization.
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-4 pt-4">
+          <a href="#pipeline" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-semibold text-sm transition shadow-lg shadow-amber-500/25 flex items-center gap-2">
+            Explore The Pipeline
+            <i class="bi bi-arrow-right"></i>
+          </a>
+          <a href="#stages" class="px-5 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 font-medium text-sm border border-zinc-800 transition">
+            Browse All 8 Modules
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Pipeline Visualizer -->
+    <section id="pipeline" class="py-16 px-4 sm:px-6 border-b border-zinc-800/60 bg-zinc-950">
+      <div class="max-w-7xl mx-auto space-y-10">
+        <div class="text-center space-y-2">
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">The Assembly Line</h2>
+          <p class="text-sm text-zinc-400">Step-by-step lifecycle of how raw JSON is transformed into an executable API backend</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <!-- Step 0 -->
+          <a href="stages/0-validation/index.html" class="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-900/90 transition group block">
+            <div class="flex items-center justify-between text-xs font-mono text-zinc-500 mb-3">
+              <span>STAGE 0</span>
+              <span class="text-emerald-400 group-hover:underline flex items-center gap-1">Read Story <i class="bi bi-arrow-right"></i></span>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg mb-3">
+              <i class="bi bi-shield-check"></i>
+            </div>
+            <h3 class="font-semibold text-white text-base mb-1">Validation</h3>
+            <p class="text-xs text-zinc-400 leading-relaxed mb-3">Verifies that configuration, JSON specs, and input trees satisfy required schema schemas.</p>
+            <div class="text-[11px] font-mono text-zinc-500">pkg: json-api-builder-validation</div>
+          </a>
+
+          <!-- Step 1 -->
+          <a href="stages/1-create-folders/index.html" class="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-amber-500/50 hover:bg-zinc-900/90 transition group block">
+            <div class="flex items-center justify-between text-xs font-mono text-zinc-500 mb-3">
+              <span>STAGE 1</span>
+              <span class="text-amber-400 group-hover:underline flex items-center gap-1">Read Story <i class="bi bi-arrow-right"></i></span>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-lg mb-3">
+              <i class="bi bi-folder-plus"></i>
+            </div>
+            <h3 class="font-semibold text-white text-base mb-1">Create Folders</h3>
+            <p class="text-xs text-zinc-400 leading-relaxed mb-3">Walks tree specifications to scaffold nested routing folders and data directories.</p>
+            <div class="text-[11px] font-mono text-zinc-500">pkg: json-api-builder-create-folders</div>
+          </a>
+
+          <!-- Step 2 -->
+          <a href="stages/2-create-files/index.html" class="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-blue-500/50 hover:bg-zinc-900/90 transition group block">
+            <div class="flex items-center justify-between text-xs font-mono text-zinc-500 mb-3">
+              <span>STAGE 2</span>
+              <span class="text-blue-400 group-hover:underline flex items-center gap-1">Read Story <i class="bi bi-arrow-right"></i></span>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center text-lg mb-3">
+              <i class="bi bi-file-earmark-plus"></i>
+            </div>
+            <h3 class="font-semibold text-white text-base mb-1">Create Files</h3>
+            <p class="text-xs text-zinc-400 leading-relaxed mb-3">Touches and provisions placeholder route files, mock tables, and data files.</p>
+            <div class="text-[11px] font-mono text-zinc-500">pkg: json-api-builder-create-files</div>
+          </a>
+
+          <!-- Step 3 -->
+          <a href="stages/3-insert-content/index.html" class="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-purple-500/50 hover:bg-zinc-900/90 transition group block">
+            <div class="flex items-center justify-between text-xs font-mono text-zinc-500 mb-3">
+              <span>STAGE 3</span>
+              <span class="text-purple-400 group-hover:underline flex items-center gap-1">Read Story <i class="bi bi-arrow-right"></i></span>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center text-lg mb-3">
+              <i class="bi bi-code-slash"></i>
+            </div>
+            <h3 class="font-semibold text-white text-base mb-1">Insert Content</h3>
+            <p class="text-xs text-zinc-400 leading-relaxed mb-3">Compiles ESTree AST into route logic using astring and populates data payloads.</p>
+            <div class="text-[11px] font-mono text-zinc-500">pkg: json-api-builder-insert-content</div>
+          </a>
+
+          <!-- Step 4 -->
+          <a href="stages/4-alter-content/index.html" class="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-pink-500/50 hover:bg-zinc-900/90 transition group block">
+            <div class="flex items-center justify-between text-xs font-mono text-zinc-500 mb-3">
+              <span>STAGE 4</span>
+              <span class="text-pink-400 group-hover:underline flex items-center gap-1">Read Story <i class="bi bi-arrow-right"></i></span>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-pink-500/10 border border-pink-500/20 text-pink-400 flex items-center justify-center text-lg mb-3">
+              <i class="bi bi-diagram-3"></i>
+            </div>
+            <h3 class="font-semibold text-white text-base mb-1">Alter Content</h3>
+            <p class="text-xs text-zinc-400 leading-relaxed mb-3">Mounts child routes into parent routers by dynamically parsing and re-emitting AST code.</p>
+            <div class="text-[11px] font-mono text-zinc-500">pkg: json-api-builder-alter-content</div>
+          </a>
+
+          <!-- Step 5 -->
+          <a href="stages/5-create-app/index.html" class="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-cyan-500/50 hover:bg-zinc-900/90 transition group block">
+            <div class="flex items-center justify-between text-xs font-mono text-zinc-500 mb-3">
+              <span>STAGE 5</span>
+              <span class="text-cyan-400 group-hover:underline flex items-center gap-1">Read Story <i class="bi bi-arrow-right"></i></span>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-lg mb-3">
+              <i class="bi bi-hdd-network"></i>
+            </div>
+            <h3 class="font-semibold text-white text-base mb-1">Create App</h3>
+            <p class="text-xs text-zinc-400 leading-relaxed mb-3">Bootstraps Hono app instance, mounts middleware strategies, and binds node-server.</p>
+            <div class="text-[11px] font-mono text-zinc-500">pkg: json-api-builder-create-app</div>
+          </a>
+
+          <!-- Step 6 -->
+          <a href="stages/6-create-endpoints/index.html" class="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-indigo-500/50 hover:bg-zinc-900/90 transition group block">
+            <div class="flex items-center justify-between text-xs font-mono text-zinc-500 mb-3">
+              <span>STAGE 6</span>
+              <span class="text-indigo-400 group-hover:underline flex items-center gap-1">Read Story <i class="bi bi-arrow-right"></i></span>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center text-lg mb-3">
+              <i class="bi bi-lightning-charge"></i>
+            </div>
+            <h3 class="font-semibold text-white text-base mb-1">Create Endpoints</h3>
+            <p class="text-xs text-zinc-400 leading-relaxed mb-3">Generates file-sync endpoints and CRUD handler routes mapped to disk collections.</p>
+            <div class="text-[11px] font-mono text-zinc-500">pkg: json-api-builder-create-endpoints</div>
+          </a>
+
+          <!-- Step 7 -->
+          <a href="stages/7-orchestrator/index.html" class="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-amber-500/50 hover:bg-zinc-900/90 transition group block">
+            <div class="flex items-center justify-between text-xs font-mono text-zinc-500 mb-3">
+              <span>STAGE 7</span>
+              <span class="text-amber-400 group-hover:underline flex items-center gap-1">Read Story <i class="bi bi-arrow-right"></i></span>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-lg mb-3">
+              <i class="bi bi-play-circle"></i>
+            </div>
+            <h3 class="font-semibold text-white text-base mb-1">The Conductor</h3>
+            <p class="text-xs text-zinc-400 leading-relaxed mb-3">Master coordinator running the 7 deterministic stages in sequence to deliver the full API.</p>
+            <div class="text-[11px] font-mono text-zinc-500">pkg: json-api-builder</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Orchestration Showcase -->
+    <section id="orchestration" class="py-16 px-4 sm:px-6 bg-zinc-900/40 border-b border-zinc-800/80">
+      <div class="max-w-5xl mx-auto space-y-8">
+        <div class="text-center space-y-2">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-mono">
+            <span>The Conductor</span>
+          </div>
+          <h2 class="text-3xl font-bold text-white">json-api-builder (Orchestrator)</h2>
+          <p class="text-zinc-400 text-sm max-w-xl mx-auto">
+            Instead of manually calling 7 separate libraries, the orchestrator ties every link in the chain with single-call simplicity.
+          </p>
+        </div>
+
+        <div class="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 font-mono text-xs text-zinc-300 shadow-2xl overflow-x-auto">
+          <div class="flex items-center gap-2 pb-4 mb-4 border-b border-zinc-800 text-zinc-500">
+            <span class="w-3 h-3 rounded-full bg-red-500/70 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500/70 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-green-500/70 inline-block"></span>
+            <span class="ml-2 text-zinc-400">build.js</span>
+          </div>
+          <pre><code><span class="text-purple-400">import</span> { build } <span class="text-purple-400">from</span> <span class="text-emerald-400">"json-api-builder"</span>;
+
+<span class="text-zinc-500">// One call conducts all 7 stages seamlessly:</span>
+<span class="text-purple-400">const</span> result = <span class="text-blue-400">build</span>({
+  clientRoot: <span class="text-amber-300">process.cwd()</span>,
+  outputRoot: <span class="text-amber-300">"./dist/api"</span>
+});
+
+console.<span class="text-blue-400">log</span>(<span class="text-emerald-400">`Server ready at: ${result.appPath}`</span>);
+console.<span class="text-blue-400">log</span>(<span class="text-emerald-400">`Integrity check: ${result.validation.valid}`</span>);</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Stages List -->
+    <section id="stages" class="py-16 px-4 sm:px-6">
+      <div class="max-w-7xl mx-auto space-y-10">
+        <div class="text-center space-y-2">
+          <h2 class="text-3xl font-bold text-white">The 8 Sibling Repositories</h2>
+          <p class="text-sm text-zinc-400">Independent npm modules built for resilience and clear separation of concerns</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <a href="repos/validation/index.html" class="p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-900/80 transition block group">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-bold text-white font-mono text-sm group-hover:text-emerald-400 transition">json-api-builder-validation</h3>
+              <span class="text-xs text-emerald-400 bg-emerald-950 px-2.5 py-0.5 rounded-full border border-emerald-900">Repo Story →</span>
+            </div>
+            <p class="text-xs text-zinc-400 mb-4">Guards inputs and proves output validity. Pre-flight schema checks prevent incomplete builds; post-flight inspections verify generated routes & syntax.</p>
+            <div class="flex items-center gap-3 text-xs font-mono text-zinc-500">
+              <span>Exports: validateConfiguration, verifyGeneratedApp</span>
+            </div>
+          </a>
+
+          <a href="repos/create-folders/index.html" class="p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-amber-500/50 hover:bg-zinc-900/80 transition block group">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-bold text-white font-mono text-sm group-hover:text-amber-400 transition">json-api-builder-create-folders</h3>
+              <span class="text-xs text-amber-400 bg-amber-950 px-2.5 py-0.5 rounded-full border border-amber-900">Repo Story →</span>
+            </div>
+            <p class="text-xs text-zinc-400 mb-4">Scaffolds directory hierarchies from tree definitions using deterministic traversal. Creates zero phantom paths.</p>
+            <div class="flex items-center gap-3 text-xs font-mono text-zinc-500">
+              <span>Exports: createFolders</span>
+            </div>
+          </a>
+
+          <a href="repos/create-files/index.html" class="p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-blue-500/50 hover:bg-zinc-900/80 transition block group">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-bold text-white font-mono text-sm group-hover:text-blue-400 transition">json-api-builder-create-files</h3>
+              <span class="text-xs text-blue-400 bg-blue-950 px-2.5 py-0.5 rounded-full border border-blue-900">Repo Story →</span>
+            </div>
+            <p class="text-xs text-zinc-400 mb-4">Provisions the skeleton files within established folders so subsequent AST parsers have valid targets.</p>
+            <div class="flex items-center gap-3 text-xs font-mono text-zinc-500">
+              <span>Exports: createFiles</span>
+            </div>
+          </a>
+
+          <a href="repos/insert-content/index.html" class="p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-purple-500/50 hover:bg-zinc-900/80 transition block group">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-bold text-white font-mono text-sm group-hover:text-purple-400 transition">json-api-builder-insert-content</h3>
+              <span class="text-xs text-purple-400 bg-purple-950 px-2.5 py-0.5 rounded-full border border-purple-900">Repo Story →</span>
+            </div>
+            <p class="text-xs text-zinc-400 mb-4">Converts abstract syntax trees (ESTree) and JSON data schemas into code modules using astring compiler.</p>
+            <div class="flex items-center gap-3 text-xs font-mono text-zinc-500">
+              <span>Exports: insertContent</span>
+            </div>
+          </a>
+
+          <a href="repos/alter-content/index.html" class="p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-pink-500/50 hover:bg-zinc-900/80 transition block group">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-bold text-white font-mono text-sm group-hover:text-pink-400 transition">json-api-builder-alter-content</h3>
+              <span class="text-xs text-pink-400 bg-pink-950 px-2.5 py-0.5 rounded-full border border-pink-900">Repo Story →</span>
+            </div>
+            <p class="text-xs text-zinc-400 mb-4">Modifies existing files to wire sub-router chains into their parents, producing clean modular routing without regex hacks.</p>
+            <div class="flex items-center gap-3 text-xs font-mono text-zinc-500">
+              <span>Exports: hookRoutes</span>
+            </div>
+          </a>
+
+          <a href="repos/create-app/index.html" class="p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-cyan-500/50 hover:bg-zinc-900/80 transition block group">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-bold text-white font-mono text-sm group-hover:text-cyan-400 transition">json-api-builder-create-app</h3>
+              <span class="text-xs text-cyan-400 bg-cyan-950 px-2.5 py-0.5 rounded-full border border-cyan-900">Repo Story →</span>
+            </div>
+            <p class="text-xs text-zinc-400 mb-4">Emits app entrypoint (`app.js`), loads configured strategies, and sets up `@hono/node-server` listeners.</p>
+            <div class="flex items-center gap-3 text-xs font-mono text-zinc-500">
+              <span>Exports: createApp, hookAppStrategies, startServer</span>
+            </div>
+          </a>
+
+          <a href="repos/create-endpoints/index.html" class="p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-indigo-500/50 hover:bg-zinc-900/80 transition block group">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-bold text-white font-mono text-sm group-hover:text-indigo-400 transition">json-api-builder-create-endpoints</h3>
+              <span class="text-xs text-indigo-400 bg-indigo-950 px-2.5 py-0.5 rounded-full border border-indigo-900">Repo Story →</span>
+            </div>
+            <p class="text-xs text-zinc-400 mb-4">Constructs standard HTTP route handlers (GET, POST, PUT, DELETE) and file sync endpoints for disk collections.</p>
+            <div class="flex items-center gap-3 text-xs font-mono text-zinc-500">
+              <span>Exports: createEndpoints, createFileSyncEndpoint</span>
+            </div>
+          </a>
+
+          <a href="repos/orchestrator/index.html" class="p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-amber-500/50 hover:bg-zinc-900/80 transition block group">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-bold text-white font-mono text-sm group-hover:text-amber-400 transition">json-api-builder-orchestrator</h3>
+              <span class="text-xs text-amber-400 bg-amber-950 px-2.5 py-0.5 rounded-full border border-amber-900">Repo Story →</span>
+            </div>
+            <p class="text-xs text-zinc-400 mb-4">The single public facade uniting the entire suite into a one-function `build()` invocation with automatic clientRoot resolution.</p>
+            <div class="flex items-center gap-3 text-xs font-mono text-zinc-500">
+              <span>Exports: build</span>
+            </div>
+          </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-zinc-800 py-8 px-4 text-center text-xs text-zinc-500 font-mono">
+    <p>Crafted by <a href="https://github.com/keshavsoft" class="text-zinc-400 hover:text-white transition">KeshavSoft</a> • Part of the JSON API Builder Open Architecture</p>
+  </footer>
+
+</body>
+</html>

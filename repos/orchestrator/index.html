@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>json-api-builder-orchestrator — Architecture & OpenAPI 3 Story</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+              900: '#78350f',
+              950: '#451a03'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-zinc-950 text-zinc-100 antialiased min-h-screen flex flex-col font-sans selection:bg-amber-500/30 selection:text-amber-200">
+
+  <!-- Top Navigation -->
+  <nav class="border-b border-zinc-800 bg-zinc-900/90 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2.5 shrink-0">
+        <a href="../../index.html" class="flex items-center gap-2 text-zinc-400 hover:text-white transition font-mono text-xs">
+          <i class="bi bi-arrow-left"></i>
+          <span>Portal Home</span>
+        </a>
+        <span class="text-zinc-600">/</span>
+        <div class="flex items-center gap-2">
+          <i class="bi bi-cpu text-amber-400 text-base"></i>
+          <span class="font-bold text-xs tracking-wider uppercase text-zinc-200">Repo: json-api-builder-orchestrator</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4 text-xs font-mono">
+        <a href="#input-files" class="text-zinc-400 hover:text-amber-300 transition hidden sm:inline">Files Structure</a>
+        <a href="#openapi-story" class="text-zinc-400 hover:text-amber-300 transition hidden sm:inline">OpenAPI 3 Story</a>
+        <a href="#orchestration-pipeline" class="text-zinc-400 hover:text-amber-300 transition hidden md:inline">Orchestration Flow</a>
+        <a href="https://github.com/keshavsoft/json-api-builder-orchestrator" target="_blank" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:text-white flex items-center gap-1.5 transition">
+          <i class="bi bi-github"></i>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Header -->
+  <header class="border-b border-zinc-800/80 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(245,158,11,0.15),rgba(255,255,255,0))] py-14 px-4 sm:px-6">
+    <div class="max-w-5xl mx-auto space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono">
+        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+        <span>The Master Conductor</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+        How the Orchestrator Works & Follows <span class="bg-gradient-to-r from-amber-400 via-orange-300 to-amber-500 bg-clip-text text-transparent">OpenAPI 3</span>
+      </h1>
+      <p class="text-base text-zinc-400 max-w-3xl leading-relaxed">
+        The orchestrator brings together deterministic directory trees, AST route synthesis, and an industry-standard OpenAPI 3 contract into a runnable Hono HTTP backend.
+      </p>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 py-10 space-y-16">
+
+    <!-- Section 1: The Input Files & Folder Architecture -->
+    <section id="input-files" class="space-y-6">
+      <div class="border-b border-zinc-800/80 pb-4">
+        <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+          <i class="bi bi-folder2-open text-amber-400"></i>
+          <span>1. Input File Hierarchy: The Specification Roots</span>
+        </h2>
+        <p class="text-sm text-zinc-400 mt-1">
+          Everything the generator creates is deterministically derived from <code class="text-amber-300">test/v1/input/</code>:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start font-mono text-xs">
+        
+        <!-- Directory Tree View -->
+        <div class="lg:col-span-5 bg-zinc-900/80 p-5 rounded-2xl border border-zinc-800">
+          <div class="text-zinc-500 font-semibold mb-3 flex items-center gap-2">
+            <i class="bi bi-diagram-2"></i>
+            <span>test/v1/input/ directory layout</span>
+          </div>
+          <pre class="text-zinc-300 leading-relaxed"><code>test/v1/input/
+├── <span class="text-amber-400 font-bold">api.json</span>                    <span class="text-zinc-500"># Endpoints, methods & strategies</span>
+├── <span class="text-blue-400 font-bold">data/</span>
+│   ├── <span class="text-zinc-300">clinics.json</span>            <span class="text-zinc-500"># Mock DB records for clinics</span>
+│   └── <span class="text-zinc-300">players.json</span>            <span class="text-zinc-500"># Mock DB for file-sync strategy</span>
+└── <span class="text-purple-400 font-bold">source-of-truth/</span>
+    ├── <span class="text-emerald-400 font-bold">openapi.json</span>            <span class="text-zinc-500"># OpenAPI 3.0.3 contract spec</span>
+    ├── <span class="text-amber-300 font-bold">tree.json</span>               <span class="text-zinc-500"># Structural physical folder tree</span>
+    └── <span class="text-pink-400 font-bold">templates/</span>
+        └── <span class="text-zinc-300">routes.estree.json</span>  <span class="text-zinc-500"># AST blueprint for route code</span></code></pre>
+        </div>
+
+        <!-- Role of each file -->
+        <div class="lg:col-span-7 space-y-3">
+          
+          <div class="p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800">
+            <div class="flex items-center justify-between text-xs font-semibold mb-1">
+              <span class="text-emerald-400">source-of-truth/openapi.json</span>
+              <span class="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800/80 px-2 py-0.5 rounded-full">OpenAPI 3.0.3</span>
+            </div>
+            <p class="text-[11px] text-zinc-400 font-sans">The formal HTTP specification defining resources, parameters, response schemas, and HTTP status codes (200, 201, 404).</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800">
+            <div class="flex items-center justify-between text-xs font-semibold mb-1">
+              <span class="text-amber-300">source-of-truth/tree.json</span>
+              <span class="text-[10px] bg-amber-950 text-amber-400 border border-amber-800/80 px-2 py-0.5 rounded-full">Scaffold Schema</span>
+            </div>
+            <p class="text-[11px] text-zinc-400 font-sans">The deterministic physical folder tree. Controls where <code class="text-zinc-300">routes.js</code> files are placed on disk without guesswork.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800">
+            <div class="flex items-center justify-between text-xs font-semibold mb-1">
+              <span class="text-amber-400">api.json</span>
+              <span class="text-[10px] bg-amber-950 text-amber-400 border border-amber-800/80 px-2 py-0.5 rounded-full">Runtime Contract</span>
+            </div>
+            <p class="text-[11px] text-zinc-400 font-sans">Defines the root routing prefix (<code class="text-zinc-300">/api</code>), server port, CRUD operations mapped to verbs, and file-sync strategies.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800">
+            <div class="flex items-center justify-between text-xs font-semibold mb-1">
+              <span class="text-pink-400">templates/routes.estree.json</span>
+              <span class="text-[10px] bg-pink-950 text-pink-400 border border-pink-800/80 px-2 py-0.5 rounded-full">ESTree AST</span>
+            </div>
+            <p class="text-[11px] text-zinc-400 font-sans">Abstract Syntax Tree for JS route generation. Astring compiles this into clean JavaScript route files without regex or string concatenation.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 2: OpenAPI 3 Standards Story -->
+    <section id="openapi-story" class="space-y-6">
+      <div class="border-b border-zinc-800/80 pb-4">
+        <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+          <i class="bi bi-file-earmark-check text-emerald-400"></i>
+          <span>2. Following OpenAPI 3: The Contract Architecture</span>
+        </h2>
+        <p class="text-sm text-zinc-400 mt-1">
+          How our architecture translates standard OpenAPI 3 schema objects directly into live endpoints
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- OpenAPI Sample -->
+        <div class="lg:col-span-6 bg-zinc-900 rounded-2xl border border-zinc-800 p-5 font-mono text-xs overflow-x-auto text-zinc-300 shadow-xl">
+          <div class="flex items-center justify-between text-zinc-500 pb-3 mb-3 border-b border-zinc-800">
+            <span class="text-emerald-400 font-semibold">source-of-truth/openapi.json (OpenAPI 3.0.3)</span>
+            <span class="text-[10px] uppercase">Specification</span>
+          </div>
+<pre><code>{
+  <span class="text-amber-400">"openapi"</span>: <span class="text-emerald-400">"3.0.3"</span>,
+  <span class="text-amber-400">"info"</span>: {
+    <span class="text-zinc-400">"title"</span>: <span class="text-emerald-400">"Clinics API"</span>,
+    <span class="text-zinc-400">"version"</span>: <span class="text-emerald-400">"1.0.0"</span>
+  },
+  <span class="text-amber-400">"servers"</span>: [{ <span class="text-zinc-400">"url"</span>: <span class="text-emerald-400">"/api/v1"</span> }],
+  <span class="text-amber-400">"paths"</span>: {
+    <span class="text-blue-400">"/clinics"</span>: {
+      <span class="text-cyan-400">"get"</span>: {
+        <span class="text-zinc-400">"operationId"</span>: <span class="text-emerald-400">"showAllClinics"</span>,
+        <span class="text-zinc-400">"summary"</span>: <span class="text-emerald-400">"Show all clinics"</span>,
+        <span class="text-zinc-400">"responses"</span>: {
+          <span class="text-purple-400">"200"</span>: {
+            <span class="text-zinc-400">"description"</span>: <span class="text-emerald-400">"Success"</span>,
+            <span class="text-zinc-400">"content"</span>: {
+              <span class="text-zinc-400">"application/json"</span>: {
+                <span class="text-zinc-400">"schema"</span>: {
+                  <span class="text-zinc-400">"type"</span>: <span class="text-emerald-400">"array"</span>,
+                  <span class="text-zinc-400">"items"</span>: { <span class="text-amber-400">"$ref"</span>: <span class="text-emerald-400">"#/components/schemas/Clinic"</span> }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  <span class="text-amber-400">"components"</span>: {
+    <span class="text-zinc-400">"schemas"</span>: {
+      <span class="text-pink-400">"Clinic"</span>: {
+        <span class="text-zinc-400">"type"</span>: <span class="text-emerald-400">"object"</span>,
+        <span class="text-zinc-400">"properties"</span>: {
+          <span class="text-zinc-400">"id"</span>: { <span class="text-zinc-400">"type"</span>: <span class="text-emerald-400">"string"</span> },
+          <span class="text-zinc-400">"name"</span>: { <span class="text-zinc-400">"type"</span>: <span class="text-emerald-400">"string"</span> }
+        },
+        <span class="text-zinc-400">"required"</span>: [<span class="text-emerald-400">"id"</span>, <span class="text-emerald-400">"name"</span>]
+      }
+    }
+  }
+}</code></pre>
+        </div>
+
+        <!-- Generated Implementation -->
+        <div class="lg:col-span-6 bg-zinc-900 rounded-2xl border border-zinc-800 p-5 font-mono text-xs overflow-x-auto text-zinc-300 shadow-xl">
+          <div class="flex items-center justify-between text-zinc-500 pb-3 mb-3 border-b border-zinc-800">
+            <span class="text-cyan-400 font-semibold">Generated: output/api/v1/clinics/routes.js</span>
+            <span class="text-[10px] uppercase">Hono Output</span>
+          </div>
+<pre><code><span class="text-purple-400">import</span> { Hono } <span class="text-purple-400">from</span> <span class="text-emerald-400">"hono"</span>;
+<span class="text-purple-400">import</span> { readFile, writeFile } <span class="text-purple-400">from</span> <span class="text-emerald-400">"node:fs/promises"</span>;
+<span class="text-purple-400">import</span> path <span class="text-purple-400">from</span> <span class="text-emerald-400">"node:path"</span>;
+
+<span class="text-purple-400">const</span> routes = <span class="text-purple-400">new</span> <span class="text-blue-400">Hono</span>();
+<span class="text-purple-400">const</span> dataPath = path.<span class="text-blue-400">resolve</span>(<span class="text-amber-300">"../../../../data/clinics.json"</span>);
+
+<span class="text-zinc-500">// Mapped directly from OpenAPI 3 GET /clinics:</span>
+routes.<span class="text-blue-400">get</span>(<span class="text-emerald-400">"/"</span>, <span class="text-purple-400">async</span> (c) => {
+  <span class="text-purple-400">const</span> rows = JSON.<span class="text-blue-400">parse</span>(<span class="text-purple-400">await</span> <span class="text-blue-400">readFile</span>(dataPath, <span class="text-emerald-400">"utf8"</span>));
+  <span class="text-purple-400">return</span> c.<span class="text-blue-400">json</span>(rows);
+});
+
+<span class="text-zinc-500">// Mapped directly from OpenAPI 3 POST /clinics:</span>
+routes.<span class="text-blue-400">post</span>(<span class="text-emerald-400">"/"</span>, <span class="text-purple-400">async</span> (c) => {
+  <span class="text-purple-400">const</span> body = <span class="text-purple-400">await</span> c.req.<span class="text-blue-400">json</span>();
+  <span class="text-purple-400">const</span> rows = JSON.<span class="text-blue-400">parse</span>(<span class="text-purple-400">await</span> <span class="text-blue-400">readFile</span>(dataPath, <span class="text-emerald-400">"utf8"</span>));
+  rows.<span class="text-blue-400">push</span>(body);
+  <span class="text-purple-400">await</span> <span class="text-blue-400">writeFile</span>(dataPath, JSON.<span class="text-blue-400">stringify</span>(rows, <span class="text-purple-400">null</span>, 2));
+  <span class="text-purple-400">return</span> c.<span class="text-blue-400">json</span>(body, 201);
+});
+
+<span class="text-purple-400">export default</span> routes;</code></pre>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 3: The 8-Stage Conductor Pipeline -->
+    <section id="orchestration-pipeline" class="space-y-6">
+      <div class="border-b border-zinc-800/80 pb-4">
+        <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+          <i class="bi bi-play-circle text-amber-400"></i>
+          <span>3. The Orchestration Pipeline</span>
+        </h2>
+        <p class="text-sm text-zinc-400 mt-1">
+          How <code class="text-amber-300">build({ clientRoot })</code> conducts the 7 stages in deterministic sequence
+        </p>
+      </div>
+
+      <div class="space-y-3 font-mono text-xs">
+        <div class="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800 flex items-start gap-4">
+          <span class="text-amber-400 font-bold w-20 shrink-0">Stage 0</span>
+          <div>
+            <div class="text-white font-semibold">validateConfiguration({ clientRoot })</div>
+            <div class="text-zinc-400 text-[11px] font-sans mt-0.5">Ensures <code class="text-zinc-300">api.json</code> and <code class="text-zinc-300">tree.json</code> exist and contain valid structures before anything touches disk.</div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800 flex items-start gap-4">
+          <span class="text-amber-400 font-bold w-20 shrink-0">Stage 1</span>
+          <div>
+            <div class="text-white font-semibold">createFolders({ clientRoot, outputRoot })</div>
+            <div class="text-zinc-400 text-[11px] font-sans mt-0.5">Walks <code class="text-zinc-300">tree.json</code> to scaffold physical folders: <code class="text-zinc-300">output/api/v1/clinics</code>, <code class="text-zinc-300">output/endpoints/fs</code>, <code class="text-zinc-300">output/data</code>.</div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800 flex items-start gap-4">
+          <span class="text-amber-400 font-bold w-20 shrink-0">Stage 2</span>
+          <div>
+            <div class="text-white font-semibold">createFiles({ clientRoot, outputRoot })</div>
+            <div class="text-zinc-400 text-[11px] font-sans mt-0.5">Touches placeholder route files and copies sample mock data (<code class="text-zinc-300">clinics.json</code>, <code class="text-zinc-300">players.json</code>).</div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800 flex items-start gap-4">
+          <span class="text-amber-400 font-bold w-20 shrink-0">Stage 3</span>
+          <div>
+            <div class="text-white font-semibold">insertContent({ clientRoot, outputRoot })</div>
+            <div class="text-zinc-400 text-[11px] font-sans mt-0.5">Reads <code class="text-zinc-300">routes.estree.json</code> and compiles syntactically correct Hono route scaffolds using AST generator <code class="text-zinc-300">astring</code>.</div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800 flex items-start gap-4">
+          <span class="text-amber-400 font-bold w-20 shrink-0">Stage 4</span>
+          <div>
+            <div class="text-white font-semibold">hookRoutes({ clientRoot, outputRoot })</div>
+            <div class="text-zinc-400 text-[11px] font-sans mt-0.5">Parses parent route modules with AST and mounts children: connects <code class="text-zinc-300">clinics/routes.js</code> into <code class="text-zinc-300">v1/routes.js</code>, and <code class="text-zinc-300">v1</code> into <code class="text-zinc-300">api/routes.js</code>.</div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800 flex items-start gap-4">
+          <span class="text-amber-400 font-bold w-20 shrink-0">Stage 5</span>
+          <div>
+            <div class="text-white font-semibold">createApp({ clientRoot, outputRoot }) & hookAppStrategies()</div>
+            <div class="text-zinc-400 text-[11px] font-sans mt-0.5">Generates root <code class="text-zinc-300">app.js</code>, binds Hono middleware, mounts routes, and wires server listener.</div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800 flex items-start gap-4">
+          <span class="text-amber-400 font-bold w-20 shrink-0">Stage 6</span>
+          <div>
+            <div class="text-white font-semibold">createEndpoints() & createFileSyncEndpoint()</div>
+            <div class="text-zinc-400 text-[11px] font-sans mt-0.5">Generates live CRUD logic for <code class="text-zinc-300">/clinics</code> and registers the <code class="text-zinc-300">/fs/file-sync</code> handler for disk syncing.</div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800 flex items-start gap-4">
+          <span class="text-amber-400 font-bold w-20 shrink-0">Stage 7</span>
+          <div>
+            <div class="text-white font-semibold">verifyGeneratedApp({ clientRoot, outputRoot })</div>
+            <div class="text-zinc-400 text-[11px] font-sans mt-0.5">Runs post-build verification, confirming all 7 generated files exist and pass JS syntax checking.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Footer -->
+    <div class="border-t border-zinc-800/80 pt-8 flex items-center justify-between text-xs font-mono">
+      <a href="../../index.html" class="px-4 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 transition flex items-center gap-2 border border-zinc-800">
+        <i class="bi bi-arrow-left"></i>
+        <span>Back to Portal Home</span>
+      </a>
+      <a href="../../stages/7-orchestrator/index.html" class="px-4 py-2 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 transition flex items-center gap-2 border border-amber-500/30">
+        <span>View Orchestrator Stage Page</span>
+        <i class="bi bi-chevron-right"></i>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-zinc-800 py-6 px-4 text-center text-xs text-zinc-500 font-mono mt-12">
+    <p>JSON API Builder Portal • <a href="https://github.com/keshavsoft" class="text-zinc-400 hover:text-white transition">KeshavSoft</a></p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>json-api-builder-create-folders — The Tree Scaffolder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="bg-zinc-950 text-zinc-100 antialiased min-h-screen flex flex-col font-sans selection:bg-amber-500/30 selection:text-amber-200">
+
+  <nav class="border-b border-zinc-800 bg-zinc-900/90 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2.5 shrink-0">
+        <a href="../../index.html" class="flex items-center gap-2 text-zinc-400 hover:text-white transition font-mono text-xs">
+          <i class="bi bi-arrow-left"></i>
+          <span>Portal Home</span>
+        </a>
+        <span class="text-zinc-600">/</span>
+        <div class="flex items-center gap-2">
+          <i class="bi bi-folder-plus text-amber-400 text-base"></i>
+          <span class="font-bold text-xs tracking-wider uppercase text-zinc-200">Repo: json-api-builder-create-folders</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 text-xs font-mono">
+        <a href="../validation/index.html" class="text-zinc-400 hover:text-zinc-200">Prev: validation</a>
+        <a href="../create-files/index.html" class="text-blue-400 hover:text-blue-300 flex items-center gap-1">
+          <span>Next: create-files</span>
+          <i class="bi bi-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="border-b border-zinc-800/80 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(245,158,11,0.15),rgba(255,255,255,0))] py-14 px-4 sm:px-6">
+    <div class="max-w-5xl mx-auto space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono">
+        <i class="bi bi-diagram-2"></i>
+        <span>Deterministic Traversal Engine</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+        json-api-builder-create-folders
+      </h1>
+      <p class="text-base text-zinc-400 max-w-3xl leading-relaxed">
+        Translates structural JSON specifications (`source-of-truth/tree.json`) into physical nested folder hierarchies using recursive depth-first traversal with zero phantom directories.
+      </p>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 py-10 space-y-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-3">
+        <div class="flex items-center gap-2 text-red-400 text-sm font-semibold font-mono">
+          <i class="bi bi-exclamation-triangle"></i>
+          <span>The Problem</span>
+        </div>
+        <p class="text-xs text-zinc-400 leading-relaxed">
+          Modern REST API frameworks like Hono rely on modular routing folders (`/api/v1/clinics`, `/endpoints/fs`). Hardcoding folder creation in build scripts creates brittle pipelines that break across operating systems.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-3">
+        <div class="flex items-center gap-2 text-amber-400 text-sm font-semibold font-mono">
+          <i class="bi bi-check-circle"></i>
+          <span>The Engine</span>
+        </div>
+        <p class="text-xs text-zinc-400 leading-relaxed">
+          Powered by <code>json-traversal-core</code>, this stage parses any valid JSON hierarchy and creates every parent-child directory cleanly using atomic `fs.mkdirSync(..., { recursive: true })`.
+        </p>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="text-xl font-bold text-white flex items-center gap-2">
+        <i class="bi bi-code-slash text-amber-400"></i>
+        <span>How It Works in Code</span>
+      </h2>
+      <div class="bg-zinc-900 p-5 rounded-2xl border border-zinc-800 font-mono text-xs overflow-x-auto text-zinc-300">
+        <pre><code><span class="text-purple-400">import</span> { createFolders } <span class="text-purple-400">from</span> <span class="text-amber-400">"json-api-builder-create-folders"</span>;
+
+<span class="text-zinc-500">// Reads source-of-truth/tree.json:</span>
+createFolders({
+  clientRoot: process.cwd(),
+  outputRoot: <span class="text-amber-300">"./output"</span>
+});
+
+<span class="text-zinc-500">// Automatically builds:
+// output/api/
+// output/api/v1/
+// output/api/v1/clinics/</span></code></pre>
+      </div>
+    </div>
+  </main>
+
+  <footer class="border-t border-zinc-800 py-6 px-4 text-center text-xs text-zinc-500 font-mono mt-12">
+    <p>JSON API Builder Portal • <a href="https://github.com/keshavsoft" class="text-zinc-400 hover:text-white transition">KeshavSoft</a></p>
+  </footer>
+</body>
+</html>

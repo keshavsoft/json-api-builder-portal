@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stage 2: Create Files — JSON API Builder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="bg-zinc-950 text-zinc-100 antialiased min-h-screen flex flex-col font-sans selection:bg-blue-500/30 selection:text-blue-200">
+
+  <nav class="border-b border-zinc-800 bg-zinc-900/90 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="../../index.html" class="flex items-center gap-2 text-zinc-400 hover:text-white transition font-mono text-xs">
+          <i class="bi bi-arrow-left"></i>
+          <span>Portal Home</span>
+        </a>
+        <span class="text-zinc-600">/</span>
+        <span class="text-xs font-semibold text-blue-400">Stage 2: Create Files</span>
+      </div>
+      <div class="flex items-center gap-4 text-xs font-mono">
+        <a href="../1-create-folders/index.html" class="text-zinc-400 hover:text-zinc-200">Prev: Folders</a>
+        <a href="../3-insert-content/index.html" class="text-purple-400 hover:text-purple-300 flex items-center gap-1">
+          <span>Next: Insert Content</span>
+          <i class="bi bi-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 py-12 space-y-12">
+    <div class="space-y-4 border-b border-zinc-800/80 pb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-mono">
+        <i class="bi bi-file-earmark-plus"></i>
+        <span>File Skeleton Provisioner</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white">Stage 2: json-api-builder-create-files</h1>
+      <p class="text-base text-zinc-400 leading-relaxed">
+        Provisions placeholder file handles across the scaffolded directory structure so AST generators and template compilers have concrete targets.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-3">
+        <div class="flex items-center gap-2 text-red-400 text-sm font-semibold font-mono">
+          <i class="bi bi-exclamation-triangle"></i>
+          <span>The Problem</span>
+        </div>
+        <p class="text-xs text-zinc-400 leading-relaxed">
+          Downstream AST code generators need to operate safely on physical files without race conditions or missing file descriptor errors.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-3">
+        <div class="flex items-center gap-2 text-blue-400 text-sm font-semibold font-mono">
+          <i class="bi bi-check-circle"></i>
+          <span>The Guarantee</span>
+        </div>
+        <p class="text-xs text-zinc-400 leading-relaxed">
+          Atomic file creation ensuring all required route files (`routes.js`), mock databases (`clinics.json`), and file-sync routes exist and are initialized cleanly.
+        </p>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="text-xl font-bold text-white flex items-center gap-2">
+        <i class="bi bi-terminal text-blue-400"></i>
+        <span>API Usage</span>
+      </h2>
+      <div class="bg-zinc-900 p-5 rounded-2xl border border-zinc-800 font-mono text-xs overflow-x-auto text-zinc-300">
+        <pre><code><span class="text-purple-400">import</span> { createFiles } <span class="text-purple-400">from</span> <span class="text-blue-400">"json-api-builder-create-files"</span>;
+
+createFiles({
+  clientRoot: <span class="text-amber-300">"./my-project"</span>,
+  outputRoot: <span class="text-amber-300">"./dist"</span>
+});</code></pre>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

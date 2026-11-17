@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>json-api-builder-validation — The Integrity Guardian</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="bg-zinc-950 text-zinc-100 antialiased min-h-screen flex flex-col font-sans selection:bg-emerald-500/30 selection:text-emerald-200">
+
+  <nav class="border-b border-zinc-800 bg-zinc-900/90 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2.5 shrink-0">
+        <a href="../../index.html" class="flex items-center gap-2 text-zinc-400 hover:text-white transition font-mono text-xs">
+          <i class="bi bi-arrow-left"></i>
+          <span>Portal Home</span>
+        </a>
+        <span class="text-zinc-600">/</span>
+        <div class="flex items-center gap-2">
+          <i class="bi bi-shield-check text-emerald-400 text-base"></i>
+          <span class="font-bold text-xs tracking-wider uppercase text-zinc-200">Repo: json-api-builder-validation</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 text-xs font-mono">
+        <a href="../create-folders/index.html" class="text-amber-400 hover:text-amber-300 flex items-center gap-1">
+          <span>Next: create-folders</span>
+          <i class="bi bi-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="border-b border-zinc-800/80 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(16,185,129,0.15),rgba(255,255,255,0))] py-14 px-4 sm:px-6">
+    <div class="max-w-5xl mx-auto space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
+        <i class="bi bi-shield-lock"></i>
+        <span>Pre-flight Contract & Post-flight Verification</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+        json-api-builder-validation
+      </h1>
+      <p class="text-base text-zinc-400 max-w-3xl leading-relaxed">
+        The guardian that bookends the entire generation process. It prevents bad builds before anything touches disk and certifies that the generated backend is syntactically sound and complete.
+      </p>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 py-10 space-y-12">
+    <!-- Story Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-3">
+        <div class="flex items-center gap-2 text-red-400 text-sm font-semibold font-mono">
+          <i class="bi bi-exclamation-triangle"></i>
+          <span>The Problem It Solves</span>
+        </div>
+        <p class="text-xs text-zinc-400 leading-relaxed">
+          Code generators that fail midway leave corrupt directory trees and broken JS files. Without strict pre-flight checks, a missing `tree.json` or invalid JSON syntax triggers runtime crashes deep inside the pipeline.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-3">
+        <div class="flex items-center gap-2 text-emerald-400 text-sm font-semibold font-mono">
+          <i class="bi bi-check-circle"></i>
+          <span>The Dual-Phase Guarantee</span>
+        </div>
+        <p class="text-xs text-zinc-400 leading-relaxed">
+          <strong>validateConfiguration()</strong> validates that input configurations, schema types, and data paths exist. <strong>verifyGeneratedApp()</strong> ensures all expected routes and `app.js` are generated and syntax-valid.
+        </p>
+      </div>
+    </div>
+
+    <!-- Contract Details -->
+    <div class="space-y-4">
+      <h2 class="text-xl font-bold text-white flex items-center gap-2">
+        <i class="bi bi-file-earmark-code text-emerald-400"></i>
+        <span>API & File Structure</span>
+      </h2>
+      <div class="bg-zinc-900 p-5 rounded-2xl border border-zinc-800 font-mono text-xs overflow-x-auto text-zinc-300">
+        <pre><code><span class="text-zinc-500">// src/index.js exports:</span>
+<span class="text-purple-400">export</span> { validateConfiguration } <span class="text-purple-400">from</span> <span class="text-emerald-400">"./v1/validate-configuration.js"</span>;
+<span class="text-purple-400">export</span> { verifyGeneratedApp } <span class="text-purple-400">from</span> <span class="text-emerald-400">"./v1/verify-generated-app.js"</span>;
+
+<span class="text-zinc-500">// 1. Before Build Starts:</span>
+validateConfiguration({ clientRoot }); <span class="text-zinc-500">// Throws descriptive error if invalid</span>
+
+<span class="text-zinc-500">// 2. After Build Finishes:</span>
+<span class="text-purple-400">const</span> status = verifyGeneratedApp({ clientRoot, outputRoot });
+<span class="text-zinc-500">// Returns: { valid: true, errors: [], warnings: [] }</span></code></pre>
+      </div>
+    </div>
+  </main>
+
+  <footer class="border-t border-zinc-800 py-6 px-4 text-center text-xs text-zinc-500 font-mono mt-12">
+    <p>JSON API Builder Portal • <a href="https://github.com/keshavsoft" class="text-zinc-400 hover:text-white transition">KeshavSoft</a></p>
+  </footer>
+</body>
+</html>
